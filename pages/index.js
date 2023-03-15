@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Carousel from './components/Carousel'
 
 export default function Home() {
   return (
@@ -10,10 +11,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className='max-w-[1500px] mx-auto px-3'>
-          This is Home
+        <div className='absolute z-10 w-full'>
+          <h1 className='text-center text-5xl font-bold text-white '>Let's go on a tour!!</h1>
         </div>
-
+        <Carousel />
       </main>
     </>
   )
