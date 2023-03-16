@@ -1,7 +1,7 @@
+import Form from '@/src/components/Form';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import Form from './components/Form';
 
 
 const imgStorageKey = 'd7274c5a1d7d29e08b6cec27d3e2d1a0'
@@ -30,9 +30,10 @@ const Create = () => {
                         place: data?.place,
                         duration: data?.duration,
                         description: data?.description,
+                        price: data?.price,
                         image: image
                     }
-                    fetch(`http://localhost:5000/package`, {
+                    fetch(`https://tour-package.onrender.com/package`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

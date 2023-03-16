@@ -29,6 +29,18 @@ const Form = ({ handleSubmit, register, onSubmit }) => {
             </div>
             <div className="form-control w-full">
                 <label className="label">
+                    <span className="label-text font-medium">Price</span>
+                </label>
+                <input
+                    type="number"
+                    placeholder='INR'
+                    className="input input-bordered w-full bg-transparent placeholder:text-black"
+                    {...register("price")}
+                    required
+                />
+            </div>
+            <div className="form-control w-full">
+                <label className="label">
                     <span className="label-text font-medium">Place</span>
                 </label>
                 <input

@@ -1,5 +1,5 @@
+import Navbar from '@/src/components/shared/Navbar';
 import '@/styles/globals.css'
-import Navbar from './components/shared/Navbar'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
