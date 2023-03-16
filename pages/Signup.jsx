@@ -1,13 +1,15 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '@/firebase.config';
 import { useForm } from "react-hook-form";
 import Link from 'next/link';
-import { withPublic } from '../src/hooks/routes';
 import Loading from '@/src/components/shared/Loading';
+import { useRouter } from 'next/router';
 
 const Signup = () => {
-    const [signInWithGoogle, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, guser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [user] = useAuthState(auth)
+    const router = useRouter()
     const [
         createUserWithEmailAndPassword,
         loading,
@@ -17,6 +19,11 @@ const Signup = () => {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     let signInError;
+    if (typeof window !== 'undefined' && user) {
+        router.push('/Package')
+
+    }
+
 
     if (loading || gLoading || updating) {
         return <Loading></Loading>
@@ -115,4 +122,4 @@ const Signup = () => {
     );
 };
 
-export default withPublic(Signup);
+export default Signup;

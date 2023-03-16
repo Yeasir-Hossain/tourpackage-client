@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import React from 'react';
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '@/firebase.config';
 import { useForm } from "react-hook-form";
 import Link from 'next/link';
-import { withPublic } from '../src/hooks/routes';
 import Loading from '@/src/components/shared/Loading';
+import { useRouter } from 'next/router';
 
 const Login = () => {
     const [signInWithGoogle, gLoading, gError] = useSignInWithGoogle(auth);
+    const [user] = useAuthState(auth)
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const router = useRouter()
     const [
         signInWithEmailAndPassword,
         loading,
@@ -16,6 +18,10 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
 
     let signInError;
+    if (typeof window !== 'undefined' && user) {
+        router.push('/Package')
+
+    }
 
     if (loading || gLoading) {
         <Loading></Loading>
@@ -93,4 +99,4 @@ const Login = () => {
     );
 };
 
-export default withPublic(Login);
+export default Login;

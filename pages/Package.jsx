@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { withProtected } from '../src/hooks/routes';
 import Packagecard from '@/src/components/Packagecard';
 import Loading from '@/src/components/shared/Loading';
+import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '@/firebase.config';
 
 const Package = () => {
     const [packages, setPackages] = useState(null)
+    const [user] = useAuthState(auth)
+    const router = useRouter()
+    if (typeof window !== 'undefined' && !user) {
+        router.push('/Login')
+    }
+
     const [loading, setLoading] = useState(true)
-    useEffect(async () => {
+    const loaddata = async () => {
         await fetch(`https://tour-package.onrender.com/package`).then(res => res.json()).then(data => {
             setPackages(data)
             setLoading(false)
         })
+    }
+    useEffect(() => {
+        loaddata()
     }, [packages, loading])
 
     return (
@@ -25,4 +36,4 @@ const Package = () => {
     );
 };
 
-export default withProtected(Package);
+export default Package;
