@@ -26,7 +26,7 @@ const Login = () => {
     if (loading || gLoading) {
         <Loading></Loading>
     }
-    if (error || gError || !user) {
+    if (error || gError) {
         signInError = <p className='text-red-600 font-bold'><small>{error?.message || gError?.message}</small></p>
     }
 
